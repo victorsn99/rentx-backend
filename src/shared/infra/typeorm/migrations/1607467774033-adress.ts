@@ -24,7 +24,7 @@ export class adress1607467774033 implements MigrationInterface {
                     isNullable: false,
                 },
                 {
-                    name: 'neighbor',
+                    name: 'neighborhood',
                     type: 'varchar',
                     isNullable: false,
                 },

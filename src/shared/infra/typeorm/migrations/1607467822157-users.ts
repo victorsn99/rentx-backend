@@ -16,7 +16,7 @@ export class users1607467822157 implements MigrationInterface {
             {
               name: 'adress_id',
               type: 'uuid',
-              isNullable: false,
+              isNullable: true,
             },
             {
               name: 'name',
