@@ -1,20 +1,10 @@
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b6b58fb0-1ef0-4ff0-86f8-e7b7cc381096/Logotipo.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b6b58fb0-1ef0-4ff0-86f8-e7b7cc381096/Logotipo.png)
-
 ### **Funcionalidades**
 
-Abaixo estão descritas as funcionalidades que você deve adicionar em sua aplicação para cumprir todos os requisitos.
+Abaixo estão descritas as funcionalidades da aplicação.
 
 ### **1. Autenticação**
 
-Permita a criação de usuários e a autenticação de usuários criados. Esses usuários serão tanto os administradores da aplicação quanto os entregadores.
-
-Para isso, você pode criar uma tabela `users`, onde todos os usuários salvos nessa tabela serão utilizados nas rotas autenticadas que você acessar.
-
-Os usuários admin devem ter um campo na tabela de dados `admin` que será `true`.
-
-- A autenticação pode ser feita utilizando JWT.
-
-**Dica:** Realize a validação dos dados de entrada;
+Permitir a criação de usuários e a autenticação de usuários criados. Esses usuários serão tanto os administradores da aplicação quanto os entregadores.
 
 Os campos que os usuários devem possuir são:
 
@@ -72,7 +62,3 @@ Você deve permitir que os alugueis realizados e salvos no seu banco de dados da
 Para essa funcionalidade, você deve permitir a listagem de veículos de acordo acordo com sua disponibilidade, de modo que ao listar carros, você deve inserir a data inicial e a data final, e mostrar apenas os carros que estarão disponíveis no range dessa data.
 
 Além disso, você deve ter alguns filtros na listagem, como por exemplo um filtro de nome (nome do veículo), valor (range de valor), filtro para o combustível (Gasolina, Elétrico, Álcool) e um filtro para transmissão (automático e manual).
-
-## **Entrega**
-
-Esse projeto **não precisa ser entregue** e não receberá correção. Após concluir o projeto, adicionar esse código ao seu Github e/ou criar uma publicação no linkedin contando sobre sua experiência é uma boa forma de demonstrar seus conhecimentos para oportunidades futuras.
