@@ -1,4 +1,3 @@
-import Appointment from '@modules/appointments/infra/typeorm/entities/Appointment';
 import { getRepository, Repository } from 'typeorm';
 import IUserTokensRepository from '@modules/users/interfaces/IUserTokensRepository';
 import User from '../entities/User';

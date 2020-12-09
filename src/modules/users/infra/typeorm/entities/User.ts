@@ -1,6 +1,7 @@
 import { Exclude, Expose } from 'class-transformer';
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, TableForeignKey, ManyToOne, JoinColumn, OneToOne } from 'typeorm';
 import uploadConfig from '@config/upload';
+import Adress from '@modules/adress/infra/typeorm/entities/Adress';
 
 @Entity('users')
 class User{
@@ -19,6 +20,19 @@ class User{
   @Column()
   @Exclude()
   password: string;
+
+  @Column()
+  cpf_cnpj: string;
+
+  @Column()
+  is_rental: boolean;
+
+  @Column()
+  adress_id: string;
+
+  @ManyToOne(() => Adress)
+  @JoinColumn({ name: 'adress_id' })
+  adress: Adress;
 
   @CreateDateColumn()
   created_at: Date;

@@ -22,6 +22,8 @@ usersRouter.post('/create', celebrate({
         name: Joi.string().required(),
         email: Joi.string().required().email(),
         password: Joi.string().required(),
+        cpf_cnpj: Joi.string().required().min(14).max(18),
+        is_rental: Joi.boolean().required(),
     },
 }), usersController.create);
 

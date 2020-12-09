@@ -10,6 +10,7 @@ interface Request {
     email: string;
     old_password?: string;
     password?: string;
+    cpf_cnpj: string;
 }
 
 @injectable()
@@ -22,7 +23,7 @@ class UpdateProfileService {
     private hashProvider: IHashProvider,
     ) {}
 
-  public async execute({ user_id, name, email, password, old_password }: Request): Promise<User> {
+  public async execute({ user_id, name, email, password, old_password, cpf_cnpj }: Request): Promise<User> {
     const user = await this.usersRepository.findById(user_id);
 
     if (!user) {
@@ -37,6 +38,7 @@ class UpdateProfileService {
 
     user.name = name;
     user.email = email;
+    user.cpf_cnpj = cpf_cnpj;
 
     console.log('OLD PASSWORD: ', old_password);
 

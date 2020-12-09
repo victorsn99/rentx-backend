@@ -1,4 +1,3 @@
-import Appointment from '@modules/appointments/infra/typeorm/entities/Appointment';
 import { getRepository, Repository, Not } from 'typeorm';
 import IUsersRepository from '@modules/users/interfaces/IUsersRepository';
 import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO';
@@ -9,6 +8,15 @@ class UsersRepository implements IUsersRepository {
   private ormRepository: Repository<User>;
   constructor() {
     this.ormRepository = getRepository(User);
+  }
+
+
+  public async findByCpfOrCnpj(cpf_cnpj: string): Promise<User | undefined> {
+    const findUser = await this.ormRepository.findOne({
+      where: { cpf_cnpj },
+    });
+
+    return findUser;
   }
 
   public async findById(id: string): Promise<User | undefined> {
@@ -44,8 +52,8 @@ class UsersRepository implements IUsersRepository {
     return users;
   }
 
-  public async create({ name, email, password }: ICreateUserDTO): Promise<User> {
-    const user = await this.ormRepository.create({ name, email, password });
+  public async create({ name, email, password, cpf_cnpj, is_rental }: ICreateUserDTO): Promise<User> {
+    const user = await this.ormRepository.create({ name, email, password, cpf_cnpj, is_rental});
 
     console.log('TYPEORM: ', user);
 

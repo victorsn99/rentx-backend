@@ -10,6 +10,8 @@ interface Request {
   name: string;
   email: string;
   password: string;
+  cpf_cnpj: string;
+  is_rental: boolean;
 }
 
 @injectable()
@@ -25,12 +27,18 @@ class CreateUserService {
     private cacheProvider: ICacheProvider,
     ) {}
 
-  public async execute({name, email, password}: Request): Promise<User> {
+  public async execute({name, email, password, cpf_cnpj, is_rental}: Request): Promise<User> {
 
-    const checkUserExists = await this.usersRepository.findByEmail(email);
+    const checkEmailExists = await this.usersRepository.findByEmail(email);
 
-    if (checkUserExists) {
+    if (checkEmailExists) {
       throw new AppError('Email address already used.', 400);
+    }
+
+    const checkCpfOrCnpjExists = await this.usersRepository.findByCpfOrCnpj(cpf_cnpj);
+
+    if (checkCpfOrCnpjExists) {
+      throw new AppError('CPF/CNPJ already used.', 400);
     }
 
     const hashedPassword = await this.hashProvider.generateHash(password);
@@ -39,9 +47,11 @@ class CreateUserService {
       name,
       email,
       password: hashedPassword,
+      cpf_cnpj,
+      is_rental
     });
 
-    await this.cacheProvider.invalidatePrefix('providers-list');
+    await this.cacheProvider.invalidatePrefix('users-list');
 
     await this.usersRepository.save(user);
 
