@@ -20,7 +20,7 @@ class AdressRepository implements IAdressRepository {
   }
 
   public async create({ street, number, neighborhood, zip_code, city, state, country }: ICreateAdressDTO): Promise<Adress> {
-    const adress = await this.ormRepository.create({ street, number, neighborhood, zip_code, city, state, country });
+    const adress = this.ormRepository.create({ street, number, neighborhood, zip_code, city, state, country });
 
     console.log('TYPEORM: ', adress);
 

@@ -17,7 +17,7 @@ export default class UsersController {
             });
 
             console.log(user, ' --- ', token);
-              
+            
             return response.json({ user: classToClass(user), token });
     }
 }

@@ -10,6 +10,21 @@ class UsersRepository implements IUsersRepository {
     this.ormRepository = getRepository(User);
   }
 
+  public async isRental(id: string): Promise<boolean | undefined> {
+    const findUser = await this.ormRepository.findOne({
+      where: { id },
+    });
+
+    if (findUser) {
+      if (findUser.is_rental === true) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return undefined;
+    }
+  }
 
   public async findByCpfOrCnpj(cpf_cnpj: string): Promise<User | undefined> {
     const findUser = await this.ormRepository.findOne({

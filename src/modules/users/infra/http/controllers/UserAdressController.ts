@@ -17,6 +17,7 @@ export default class ProfileController {
         });
 
         console.log(user);
+        console.log(user.adress);
 
         return response.status(201).json(classToClass(user));
     }

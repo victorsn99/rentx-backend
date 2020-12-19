@@ -6,7 +6,7 @@ import { classToClass } from 'class-transformer';
 import { Request, Response} from 'express';
 import { container } from 'tsyringe';
 
-export default class UsersController {
+export default class AdressController {
     public async create(request: Request, response: Response): Promise<Response> {
         const { street, number, neighborhood, zip_code, city, state, country } =  request.body;
 
@@ -22,7 +22,8 @@ export default class UsersController {
     }
 
     public async update(request: Request, response: Response): Promise<Response> {
-        const { adress_id, street, number, neighborhood, zip_code, city, state, country } =  request.body;
+        const { adress_id } = request.params;
+        const { street, number, neighborhood, zip_code, city, state, country } =  request.body;
 
         const updateAdress = container.resolve(UpdateAdressService);
 
@@ -36,23 +37,21 @@ export default class UsersController {
     }
 
     public async delete(request: Request, response: Response): Promise<Response> {
-        const { adress_id } =  request.body;
+        const { adress_id } =  request.params;
 
         const deleteAdress = container.resolve(DeleteAdressService);
 
-        await deleteAdress.execute(adress_id);
+        await deleteAdress.execute({adress_id});
 
-        return response.status(204);
+        return response.status(204).json();
     }
 
     public async show(request: Request, response: Response): Promise<Response> {
-        const { adress_id } =  request.body;
+        const { adress_id } =  request.params;
 
         const showAdress = container.resolve(ShowAdressService);
 
-        const adress = await showAdress.execute({
-            adress_id
-        });
+        const adress = await showAdress.execute({adress_id});
 
         return response.status(200).json(classToClass(adress));
     }

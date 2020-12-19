@@ -2,10 +2,12 @@ import { Router } from 'express';
 
 import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
 import ProfileController from '../controllers/ProfileController';
+import UserAdressController from '../controllers/UserAdressController';
 import { celebrate, Segments, Joi } from 'celebrate';
 
 const profileRouter = Router();
 const profileController = new ProfileController();
+const userAdressController = new UserAdressController();
 
 profileRouter.use(ensureAuthenticated);
 
@@ -25,6 +27,6 @@ profileRouter.put('/addAdress', celebrate({
     [Segments.BODY]: {
         adress_id: Joi.string().uuid(),
     }
-}), profileController.update);
+}), userAdressController.update);
 
 export default profileRouter;

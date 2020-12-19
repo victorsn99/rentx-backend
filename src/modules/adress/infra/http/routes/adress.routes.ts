@@ -9,7 +9,11 @@ import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepo
 import AdressController from '../controllers/AdressController';
 import { celebrate, Joi, Segments } from 'celebrate';
 
+
+
 const adressRouter = Router();
+
+adressRouter.use(ensureAuthenticated);
 const adressController = new AdressController();
 
 adressRouter.post('/create', celebrate({
@@ -24,7 +28,7 @@ adressRouter.post('/create', celebrate({
     },
 }), adressController.create);
 
-adressRouter.put('/update', celebrate({
+adressRouter.put('/update/:adress_id', celebrate({
     [Segments.BODY]: {
         street: Joi.string().required(),
         number: Joi.number().required(),
@@ -36,8 +40,8 @@ adressRouter.put('/update', celebrate({
     },
 }), adressController.update);
 
-adressRouter.delete('/delete', adressController.delete);
+adressRouter.delete('/delete/:adress_id', adressController.delete);
 
-adressRouter.get('/show', adressController.show);
+adressRouter.get('/show/:adress_id', adressController.show);
 
-export default usersRouter;
+export default adressRouter;

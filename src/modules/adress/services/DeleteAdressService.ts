@@ -4,7 +4,7 @@ import AppError from '@shared/errors/AppError';
 import IUsersRepository from "../interfaces/IAdressRepository";
 
 interface Request {
-    user_id: string;
+    adress_id: string;
 }
 
 @injectable()
@@ -15,8 +15,8 @@ class DeleteAdressService {
     
     ){}
 
-  public async execute({ user_id }: Request): Promise<void> {
-    const adress = await this.adressRepository.delete(user_id);
+  public async execute({ adress_id }: Request): Promise<void> {
+    await this.adressRepository.delete(adress_id);
   }
 }
 
