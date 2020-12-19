@@ -5,7 +5,7 @@
     "port": 5432,
     "username": "postgres",
     "password": "docker",
-    "database": "gostack_gobarber",
+    "database": "rentx",
     "entities": [
       "./src/modules/**/infra/typeorm/entities/*.ts"
     ],
@@ -23,7 +23,7 @@
     "port": 27017,
     "username": "",
     "password": "",
-    "database": "gostack_gobarber",
+    "database": "rentx",
     "useUnifiedTopology": true,
     "entities": [
       "./src/modules/**/infra/typeorm/schemas/*.ts"
