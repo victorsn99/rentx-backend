@@ -74,6 +74,11 @@ export class cars1607467949138 implements MigrationInterface {
                     isNullable: false,
                 },
                 {
+                    name: 'image',
+                    type: 'varchar',
+                    isNullable: true,
+                },
+                {
                   name: 'updated_at',
                   type: 'timestamp',
                   default: 'now()',

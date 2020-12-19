@@ -8,9 +8,12 @@ import IUserTokensRepository from '@modules/users/interfaces/IUserTokensReposito
 import UserTokensRepository from '@modules/users/infra/typeorm/repositories/UserTokensRepository';
 import INotificationsRepository from '@modules/notifications/interfaces/INotificationsRepository';
 import NotificationsRepository from '@modules/notifications/infra/typeorm/repositories/NotificationsRepository';
+import ICarsRepository from '@modules/cars/interfaces/ICarsRepository';
+import CarsRepository from '@modules/cars/infra/typeorm/repositories/CarsRepository';
 import './providers';
 
 container.registerSingleton<INotificationsRepository>('NotificationsRepository', NotificationsRepository);
 container.registerSingleton<IAdressRepository>('AdressRepository', AdressRepository);
 container.registerSingleton<IUsersRepository>('UsersRepository', UsersRepository);
 container.registerSingleton<IUserTokensRepository>('UserTokensRepository', UserTokensRepository);
+container.registerSingleton<ICarsRepository>('CarsRepository', CarsRepository);
