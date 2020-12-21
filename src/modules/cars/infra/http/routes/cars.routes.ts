@@ -19,6 +19,9 @@ carsRouter.get('/findByName/:name', carsController.findByName);
 carsRouter.get('/findByFuel/:fuel', carsController.findByFuel);
 carsRouter.get('/findByTransmission/:transmission', carsController.findByTransmission);
 carsRouter.get('/findByType/:type', carsController.findByType);
+
+carsRouter.put('/increaseCarQuantity/:car_id', carsController.increaseCarQuantity);
+carsRouter.put('/decreaseCarQuantity/:car_id', carsController.decreaseCarQuantity);
  
 carsRouter.delete('/delete/:car_id', carsController.delete);
 

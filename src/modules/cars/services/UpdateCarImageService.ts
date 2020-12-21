@@ -11,7 +11,7 @@ interface Request {
 }
 
 @injectable()
-class UpdateUserimageService {
+class UpdateCarImageService {
   constructor(
     @inject('CarsRepository')
     private carsRepository: ICarsRepository,
@@ -42,4 +42,4 @@ class UpdateUserimageService {
   }
 }
 
-export default UpdateUserimageService;
+export default UpdateCarImageService;

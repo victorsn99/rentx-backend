@@ -7,6 +7,9 @@ import ShowCarsByTransmissionService from '@modules/cars/services/ShowCarsByTran
 import UpdateCarsService from '@modules/cars/services/UpdateCarsService';
 import DeleteCarsService from '@modules/cars/services/DeleteCarsService';
 import UpdateCarImageService from '@modules/cars/services/UpdateCarImageService';
+import DecreaseCarQuantityService from '@modules/cars/services/DecreaseCarQuantityService';
+import IncreaseCarQuantityService from '@modules/cars/services/IncreaseCarQuantityService';
+
 import { classToClass } from 'class-transformer';
 import { Request, Response} from 'express';
 import multer from 'multer';
@@ -53,7 +56,34 @@ export default class CarController {
         const findCarById = container.resolve(ShowCarsByIdService);
 
         const car = await findCarById.execute({ car_id });
+        
         return response.json(classToClass(car));
+    }
+
+    public async decreaseCarQuantity(request: Request, response: Response): Promise<Response>{
+        const {car_id} = request.params;
+
+        const findCarById = container.resolve(ShowCarsByIdService);
+        const decreaseCarQuantity = container.resolve(DecreaseCarQuantityService);
+
+        const { name, quantity } = await findCarById.execute({ car_id });
+
+        await decreaseCarQuantity.execute({ car_id, quantity })
+        
+        return response.json({ message: `Car ${name} quantity decreased -1. Actual quantity: ${quantity - 1}`});
+    }
+
+    public async increaseCarQuantity(request: Request, response: Response): Promise<Response>{
+        const {car_id} = request.params;
+
+        const findCarById = container.resolve(ShowCarsByIdService);
+        const increaseCarQuantity = container.resolve(IncreaseCarQuantityService);
+
+        const { name, quantity } = await findCarById.execute({ car_id });
+
+        await increaseCarQuantity.execute({ car_id, quantity })
+        
+        return response.json({ message: `Car ${name} quantity increased +1. Actual quantity: ${quantity + 1}`});
     }
 
     public async findByName(request: Request, response: Response): Promise<Response>{

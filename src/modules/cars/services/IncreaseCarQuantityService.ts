@@ -7,22 +7,12 @@ import ICarsRepository from '../interfaces/ICarsRepository';
 import Cars from '../infra/typeorm/entities/Cars';
 
 interface Request {
-    name: string;
-    rental_id: string;
-    brand: string;
-    daily_value: number;
-    category: string;
-    fuel: string;
-    horsepower: number;
-    engine: string;
-    transmission: string;
-    type: string;
+    car_id: string;
     quantity: number;
-    color: string;
 }
 
 @injectable()
-class CreateCarService {
+class CreateUserService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
@@ -34,40 +24,18 @@ class CreateCarService {
     private cacheProvider: ICacheProvider,
     ) {}
 
-  public async execute({ name, 
-    rental_id,
-    brand, 
-    daily_value,
-    category,
-    fuel,
-    horsepower,
-    engine, 
-    transmission,
-    type, 
+  public async execute({ 
+    car_id,
     quantity, 
-    color
   }: Request): Promise<Cars> {
-    
-    const userIsRental = await this.usersRepository.isRental(rental_id);
 
-    if (!userIsRental) {
-      throw new AppError('You should be an rental to register a car.', 401);
+    const car = await this.carsRepository.findById(car_id);
+
+    if (!car) {
+      throw new AppError('Car not found', 401);
     }
 
-    const car = await this.carsRepository.create({
-      name, 
-      rental_id,
-      brand, 
-      daily_value,
-      category,
-      fuel,
-      horsepower,
-      engine, 
-      transmission,
-      type, 
-      quantity, 
-      color
-    });
+    car.quantity = quantity + 1;
 
     await this.cacheProvider.invalidatePrefix('cars-list');
 
@@ -77,4 +45,4 @@ class CreateCarService {
   }
 }
 
-export default CreateCarService;
+export default CreateUserService;

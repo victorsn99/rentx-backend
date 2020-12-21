@@ -1,6 +1,7 @@
 import { Exclude, Expose } from 'class-transformer';
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany, JoinColumn } from 'typeorm';
 import uploadConfig from '@config/upload';
+import User from '@modules/users/infra/typeorm/entities/User';
 
 @Entity('adress')
 class Adress{
