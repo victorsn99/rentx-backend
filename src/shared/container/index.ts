@@ -10,6 +10,8 @@ import INotificationsRepository from '@modules/notifications/interfaces/INotific
 import NotificationsRepository from '@modules/notifications/infra/typeorm/repositories/NotificationsRepository';
 import ICarsRepository from '@modules/cars/interfaces/ICarsRepository';
 import CarsRepository from '@modules/cars/infra/typeorm/repositories/CarsRepository';
+import IInsuranceRepository from '@modules/insurance/interfaces/IInsuranceRepository';
+import InsuranceRepository from '@modules/insurance/infra/typeorm/repositories/InsuranceRepository';
 import './providers';
 
 container.registerSingleton<INotificationsRepository>('NotificationsRepository', NotificationsRepository);
@@ -17,3 +19,4 @@ container.registerSingleton<IAdressRepository>('AdressRepository', AdressReposit
 container.registerSingleton<IUsersRepository>('UsersRepository', UsersRepository);
 container.registerSingleton<IUserTokensRepository>('UserTokensRepository', UserTokensRepository);
 container.registerSingleton<ICarsRepository>('CarsRepository', CarsRepository);
+container.registerSingleton<IInsuranceRepository>('InsuranceRepository', InsuranceRepository);
