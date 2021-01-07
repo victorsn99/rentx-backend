@@ -14,6 +14,7 @@ import { classToClass } from 'class-transformer';
 import { Request, Response} from 'express';
 import multer from 'multer';
 import { container } from 'tsyringe';
+import AppError from '@shared/errors/AppError';
 
 export default class CarController {
     public async create(request: Request, response: Response): Promise<Response> {
@@ -67,6 +68,10 @@ export default class CarController {
         const decreaseCarQuantity = container.resolve(DecreaseCarQuantityService);
 
         const { name, quantity } = await findCarById.execute({ car_id });
+
+        if (quantity === 0) {
+            throw new AppError('You shoudnt decrease car quantity below 0');
+        }
 
         await decreaseCarQuantity.execute({ car_id, quantity })
         
