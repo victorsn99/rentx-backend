@@ -12,6 +12,12 @@ import ICarsRepository from '@modules/cars/interfaces/ICarsRepository';
 import CarsRepository from '@modules/cars/infra/typeorm/repositories/CarsRepository';
 import IInsuranceRepository from '@modules/insurance/interfaces/IInsuranceRepository';
 import InsuranceRepository from '@modules/insurance/infra/typeorm/repositories/InsuranceRepository';
+import IRentalsRepository from '@modules/rental/interfaces/IRentalsRepository';
+import RentalsRepository from '@modules/rental/infra/typeorm/repositories/RentalRepository';
+import IRentalsUsersRepository from '@modules/rental/interfaces/users/IRentalsUsersRepository';
+import RentalsUsersRepository from '@modules/rental/infra/typeorm/repositories/users/RentalsUsersRepository';
+import IRentalsRentalRepository from '@modules/rental/interfaces/rental/IRentalsCarRentalRepository';
+import RentalsRentalRepository from '@modules/rental/infra/typeorm/repositories/rental/RentalsCarRentalRepository';
 import './providers';
 
 container.registerSingleton<INotificationsRepository>('NotificationsRepository', NotificationsRepository);
@@ -20,3 +26,6 @@ container.registerSingleton<IUsersRepository>('UsersRepository', UsersRepository
 container.registerSingleton<IUserTokensRepository>('UserTokensRepository', UserTokensRepository);
 container.registerSingleton<ICarsRepository>('CarsRepository', CarsRepository);
 container.registerSingleton<IInsuranceRepository>('InsuranceRepository', InsuranceRepository);
+container.registerSingleton<IRentalsRepository>('RentalsRepository', RentalsRepository);
+container.registerSingleton<IRentalsUsersRepository>('RentalsUsersRepository', RentalsUsersRepository);
+container.registerSingleton<IRentalsRentalRepository>('RentalsRentalRepository', RentalsRentalRepository);

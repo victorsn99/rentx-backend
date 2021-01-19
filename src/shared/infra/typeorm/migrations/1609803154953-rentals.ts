@@ -19,7 +19,7 @@ export class rentals1609803154953 implements MigrationInterface {
               isNullable: false,
             },
             {
-              name: 'rental_id',
+              name: 'car_rental_id',
               type: 'uuid',
               isNullable: false,
             },
@@ -34,14 +34,23 @@ export class rentals1609803154953 implements MigrationInterface {
                 isNullable: true,
             },
             {
+              name: 'total_value',
+              type: 'decimal',
+              isNullable: false,
+            },
+            {
               name: 'start_date',
               type: 'timestamp with time zone',
               isNullable: false,
             },
-            
             {
                 name: 'end_date',
                 type: 'timestamp with time zone',
+                isNullable: false,
+            },
+            {
+                name: 'is_active',
+                type: 'boolean',
                 isNullable: false,
             },
             {
@@ -66,8 +75,8 @@ export class rentals1609803154953 implements MigrationInterface {
           }));
 
           await queryRunner.createForeignKey('rentals', new TableForeignKey({
-            name: 'rentalsRental',
-            columnNames: ['rental_id'],
+            name: 'rentalsCarRental',
+            columnNames: ['car_rental_id'],
             referencedColumnNames: ['id'],
             referencedTableName: 'users',
             onDelete: 'SET NULL',
