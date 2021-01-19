@@ -44,7 +44,6 @@ carsRouter.put('/update/:car_id', celebrate({
 carsRouter.post('/create', celebrate({
     [Segments.BODY]: {
         name: Joi.string().required(),
-        rental_id: Joi.string().required(),
         brand: Joi.string().required(),
         daily_value: Joi.number().required(),
         category: Joi.string().required(),

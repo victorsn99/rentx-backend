@@ -18,9 +18,10 @@ import AppError from '@shared/errors/AppError';
 
 export default class CarController {
     public async create(request: Request, response: Response): Promise<Response> {
+        const rental_id = request.user.id;
+        
         const {  name, 
             brand,
-            rental_id,
             daily_value,
             category, 
             fuel,
@@ -64,31 +65,21 @@ export default class CarController {
     public async decreaseCarQuantity(request: Request, response: Response): Promise<Response>{
         const {car_id} = request.params;
 
-        const findCarById = container.resolve(ShowCarsByIdService);
         const decreaseCarQuantity = container.resolve(DecreaseCarQuantityService);
 
-        const { name, quantity } = await findCarById.execute({ car_id });
-
-        if (quantity === 0) {
-            throw new AppError('You shoudnt decrease car quantity below 0');
-        }
-
-        await decreaseCarQuantity.execute({ car_id, quantity })
+        await decreaseCarQuantity.execute({ car_id });
         
-        return response.json({ message: `Car ${name} quantity decreased -1. Actual quantity: ${quantity - 1}`});
+        return response.json({ message: `Car quantity decreased -1.`});
     }
 
     public async increaseCarQuantity(request: Request, response: Response): Promise<Response>{
         const {car_id} = request.params;
-
-        const findCarById = container.resolve(ShowCarsByIdService);
+        
         const increaseCarQuantity = container.resolve(IncreaseCarQuantityService);
 
-        const { name, quantity } = await findCarById.execute({ car_id });
-
-        await increaseCarQuantity.execute({ car_id, quantity })
+        await increaseCarQuantity.execute({ car_id });
         
-        return response.json({ message: `Car ${name} quantity increased +1. Actual quantity: ${quantity + 1}`});
+        return response.json({ message: `Car quantity increased +1.`});
     }
 
     public async findByName(request: Request, response: Response): Promise<Response>{

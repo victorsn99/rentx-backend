@@ -8,7 +8,6 @@ import Cars from '../infra/typeorm/entities/Cars';
 
 interface Request {
     car_id: string;
-    quantity: number;
 }
 
 @injectable()
@@ -25,8 +24,7 @@ class CreateUserService {
     ) {}
 
   public async execute({ 
-    car_id,
-    quantity, 
+    car_id
   }: Request): Promise<Cars> {
 
     const car = await this.carsRepository.findById(car_id);
@@ -35,11 +33,11 @@ class CreateUserService {
       throw new AppError('Car not found', 401);
     }
 
-    car.quantity = quantity + 1;
+    const carIncreased = await this.carsRepository.increaseQuantity(car_id);
 
     await this.cacheProvider.invalidatePrefix('cars-list');
 
-    await this.carsRepository.save(car);
+    await this.carsRepository.save(carIncreased);
 
     return car;
   }

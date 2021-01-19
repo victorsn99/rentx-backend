@@ -2,11 +2,56 @@ import { getRepository, Repository, Not, Like } from 'typeorm';
 import ICarsRepository from '@modules/cars/interfaces/ICarsRepository';
 import ICreateCarsDTO from '@modules/cars/dtos/ICreateCarsDTO';
 import Cars from '../entities/Cars';
+import AppError from '@shared/errors/AppError';
 
 class CarsRepository implements ICarsRepository {
   private ormRepository: Repository<Cars>;
   constructor() {
     this.ormRepository = getRepository(Cars);
+  }
+
+  public async decreaseQuantity(id: string): Promise<Cars> {
+    const findCar = await this.ormRepository.findOne({
+      where: { id },
+    });
+
+    if (findCar) {
+      if (findCar.quantity > 0) {
+        findCar.quantity = findCar.quantity - 1;
+      } else {
+        throw new AppError('This car quantity is actually 0.')
+      }
+    } else {
+      throw new AppError('Car not found');
+    }
+
+    return findCar;
+  }
+
+  public async increaseQuantity(id: string): Promise<Cars> {
+    const findCar = await this.ormRepository.findOne({
+      where: { id },
+    });
+
+    if (findCar) {
+      findCar.quantity = findCar.quantity + 1; 
+    } else {
+      throw new AppError('Car not found');
+    }
+
+    return findCar;
+  }
+
+  public async returnQuantity(id: string): Promise<number> {
+    const findCar = await this.ormRepository.findOne({
+      where: { id },
+    });
+
+    if (findCar) {
+      return findCar.quantity;
+    } else {
+      return 0;
+    }
   }
   
   public async findByName(name: string): Promise<Cars[] | undefined> {
