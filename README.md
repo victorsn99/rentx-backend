@@ -1,5 +1,9 @@
 ### **Funcionalidades**
 
+Para executar, instale as dependências rodando "npm" ou "yarn", e em seguida, rode "npm start" ou "yarn start".
+
+### **Funcionalidades**
+
 Abaixo estão descritas as funcionalidades da aplicação.
 
 ### **1. Autenticação**
